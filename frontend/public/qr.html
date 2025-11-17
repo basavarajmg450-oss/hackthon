@@ -1,0 +1,14 @@
+<div id="reader" style="width:300px;"></div>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+  function onScanSuccess(decodedText) {
+    fetch('/mark-attendance', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ method: 'qr', code: decodedText })
+    });
+  }
+
+  const qrScanner = new Html5Qrcode("reader");
+  qrScanner.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 }, onScanSuccess);
+</script>

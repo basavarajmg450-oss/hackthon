@@ -1,0 +1,10 @@
+<script>
+navigator.geolocation.getCurrentPosition(position => {
+  const { latitude, longitude } = position.coords;
+  fetch('/mark-attendance', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ method: 'location', lat: latitude, lng: longitude })
+  });
+});
+</script>
